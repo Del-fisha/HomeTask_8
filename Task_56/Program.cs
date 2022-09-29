@@ -5,55 +5,13 @@
 // 8 4 2 4
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+int[,] numbers = new int[4, 4];
+FillArrayRandom(numbers);
+PrintArray(numbers);
+Console.WriteLine();
+RowMinSum(numbers);
 
-Console.Clear();
-
-void Print(string text)
-{
-    Console.Write(text);
-}
-
-int UserNum()
-{
-    int a = Convert.ToInt32(Console.ReadLine());
-    return a;
-}
-
-Print("Введите количество строк массива: ");
-int row = UserNum();
-Print("Введите количество столбцов массива: ");
-int col = UserNum();
-Print("Введите минимальное число массива: ");
-int min = UserNum();
-Print("Введите максимальное число массива: ");
-int max = UserNum();
-int[,] numbers = new int[row, col];
-Console.Clear();
-
-void FillArray(int[,] array)
-{
-    for (int i = 0; i < row; i++)
-    {
-        for (int j = 0; j < col; j++)
-        {
-            numbers[i, j] = new Random().Next(min, max + 1);
-        }
-    }
-}
-
-void PrintArray(int[,] array)
-{
-    for (int i = 0; i < row; i++)
-    {
-        for (int j = 0; j < col; j++)
-        {
-            Console.Write($"{array[i, j]} ");
-        }
-        Console.WriteLine();
-    }
-}
-
-void MinSum(int[,] array)
+void RowMinSum(int[,] array)
 {
     int minRow = 0;
     int minSumRow = 0;
@@ -72,9 +30,28 @@ void MinSum(int[,] array)
         }
         sumRow = 0;
     }
-    Console.Write($"Наименьшая сумма элементов в строке {minSumRow + 1}");
+    Console.Write($"{minSumRow + 1} строка");
 }
 
-FillArray(numbers);
-PrintArray(numbers);
-MinSum(numbers);
+void PrintArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+void FillArrayRandom(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(1, 10);
+        }
+    }
+}
